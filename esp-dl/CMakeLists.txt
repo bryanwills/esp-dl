@@ -1,8 +1,10 @@
 idf_build_get_property(target IDF_TARGET)
 
+# Runtime / image / audio stay in SRC_DIRS. NN kernels in dl/base and
+# dl/base/isa are added in esp_dl_compile_finalize() from spec/ops.yml.
+# dl/base/dl_kernel.cpp is always added there.
 set(src_dirs        ./dl/tool/src
                     ./dl/tensor/src
-                    ./dl/base
                     ./dl/math/src
                     ./dl/model/src
                     ./dl/module/src
@@ -20,6 +22,7 @@ set(include_dirs    ./dl
                     ./dl/tensor/include
                     ./dl/base
                     ./dl/base/isa
+                    ./dl/base/isa/c
                     ./dl/math/include
                     ./dl/model/include
                     ./dl/module/include
@@ -37,7 +40,6 @@ file(GLOB exclude_srcs RELATIVE ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_LIST_D
 
 if(CONFIG_IDF_TARGET_ESP32)
     list(APPEND src_dirs        dl/tool/isa/xtensa)
-    list(APPEND src_dirs        dl/base/isa/xtensa)
     list(APPEND include_dirs    dl/base/isa/xtensa)
 
 elseif(CONFIG_IDF_TARGET_ESP32S2)
@@ -45,8 +47,6 @@ elseif(CONFIG_IDF_TARGET_ESP32S2)
 elseif(CONFIG_IDF_TARGET_ESP32S3)
     list(APPEND src_dirs        dl/tool/isa/xtensa)
     list(APPEND src_dirs        dl/tool/isa/tie728)
-    list(APPEND src_dirs        dl/base/isa/xtensa)
-    list(APPEND src_dirs        dl/base/isa/tie728)
     list(APPEND include_dirs    dl/base/isa/tie728)
     list(APPEND include_dirs    dl/base/isa/xtensa)
 
@@ -54,7 +54,6 @@ elseif(CONFIG_IDF_TARGET_ESP32C3)
 
 elseif(CONFIG_IDF_TARGET_ESP32P4 OR CONFIG_IDF_TARGET_ESP32S31)
     list(APPEND src_dirs        dl/tool/isa/esp32p4)
-    list(APPEND src_dirs        dl/base/isa/esp32p4)
     list(APPEND include_dirs    dl/base/isa/esp32p4)
     list(APPEND src_dirs        ./vision/image/isa/esp32p4)
     file(GLOB ext_exclude_srcs RELATIVE ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_LIST_DIR}/vision/image/isa/esp32p4/dl_esp32p4_cvt_color_*.S ${CMAKE_CURRENT_LIST_DIR}/vision/image/isa/esp32p4/dl_esp32p4_resize_nn_*.S)
@@ -139,6 +138,12 @@ if (CONFIG_PIX_CVT_YUV_TO_YUV_SUPPORT)
 endif()
 
 idf_component_register(SRC_DIRS ${src_dirs} EXCLUDE_SRCS ${exclude_srcs} INCLUDE_DIRS ${include_dirs} REQUIRES ${requires})
+
+# Pack/strip must run AFTER every model component's CMakeLists has called
+# esp_dl_compile_add_*. Same defer point as esp-dl_flasher (end of the
+# top-level source directory).
+include(${COMPONENT_DIR}/cmake/compile_finalize.cmake)
+cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL esp_dl_compile_finalize)
 
 component_compile_options(-ffast-math -O3 -Wno-error=format=-Wno-format)
 add_prebuilt_library(fbs_model fbs_loader/lib/${IDF_TARGET}/libfbs_model.a)
