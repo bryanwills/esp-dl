@@ -9,7 +9,7 @@ namespace dl {
 namespace base {
 
 template <typename feature_t, typename bias_t, typename buffer_t>
-inline void buffer_bias_linear(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
+void buffer_bias_linear(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
 {
     bias_t *bias_ptr = (bias_t *)args.bias_element;
     if (args.mac_shift == INT_MIN) // per-channel
@@ -39,7 +39,7 @@ inline void buffer_bias_linear(feature_t *output_ptr, buffer_t *buffer_ptr, cons
 }
 
 template <typename feature_t, typename bias_t, typename buffer_t>
-inline void buffer_bias_relu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
+void buffer_bias_relu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
 {
     bias_t *bias_ptr = (bias_t *)args.bias_element;
     if (args.mac_shift == INT_MIN) // per-channel
@@ -75,7 +75,7 @@ inline void buffer_bias_relu(feature_t *output_ptr, buffer_t *buffer_ptr, const 
 }
 
 template <typename feature_t, typename bias_t, typename buffer_t>
-inline void buffer_bias_leakyrelu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
+void buffer_bias_leakyrelu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
 {
     bias_t *bias_ptr = (bias_t *)args.bias_element;
     if (args.mac_shift == INT_MIN) // per-channel
@@ -115,7 +115,7 @@ inline void buffer_bias_leakyrelu(feature_t *output_ptr, buffer_t *buffer_ptr, c
 }
 
 template <typename feature_t, typename bias_t, typename buffer_t>
-inline void buffer_bias_prelu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
+void buffer_bias_prelu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
 {
     bias_t *bias_ptr = (bias_t *)args.bias_element;
     feature_t *alpha_ptr = (feature_t *)args.activation_alpha_ptr;
@@ -161,7 +161,7 @@ inline void buffer_bias_prelu(feature_t *output_ptr, buffer_t *buffer_ptr, const
  *
  */
 template <typename feature_t, typename buffer_t>
-inline void buffer_0000_linear(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
+void buffer_0000_linear(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
 {
     if (args.mac_shift == INT_MIN) // per-channel
     {
@@ -184,7 +184,7 @@ inline void buffer_0000_linear(feature_t *output_ptr, buffer_t *buffer_ptr, cons
 }
 
 template <typename feature_t, typename buffer_t>
-inline void buffer_0000_relu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
+void buffer_0000_relu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
 {
     if (args.mac_shift == INT_MIN) // per-channel
     {
@@ -213,7 +213,7 @@ inline void buffer_0000_relu(feature_t *output_ptr, buffer_t *buffer_ptr, const 
 }
 
 template <typename feature_t, typename buffer_t>
-inline void buffer_0000_leakyrelu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
+void buffer_0000_leakyrelu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
 {
     if (args.mac_shift == INT_MIN) // per-channel
     {
@@ -246,7 +246,7 @@ inline void buffer_0000_leakyrelu(feature_t *output_ptr, buffer_t *buffer_ptr, c
 }
 
 template <typename feature_t, typename buffer_t>
-inline void buffer_0000_prelu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
+void buffer_0000_prelu(feature_t *output_ptr, buffer_t *buffer_ptr, const ConvArgsType &args)
 {
     feature_t *alpha_ptr = (feature_t *)args.activation_alpha_ptr;
     if (args.mac_shift == INT_MIN) // per-channel
@@ -279,109 +279,52 @@ inline void buffer_0000_prelu(feature_t *output_ptr, buffer_t *buffer_ptr, const
     }
 }
 
-} // namespace base
-} // namespace dl
-
-using dl::base::buffer_0000_leakyrelu;
-using dl::base::buffer_0000_linear;
-using dl::base::buffer_0000_prelu;
-using dl::base::buffer_0000_relu;
-using dl::base::buffer_bias_leakyrelu;
-using dl::base::buffer_bias_linear;
-using dl::base::buffer_bias_prelu;
-using dl::base::buffer_bias_relu;
-using dl::base::ConvArgsType;
-
-extern "C" {
-
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_TAIL_LINEAR
-void dl_c_s16_tail_linear(int16_t *output, DL_S16_BUFFER_TYPE *buffer, const ConvArgsType &args)
-{
-    buffer_0000_linear<int16_t, DL_S16_BUFFER_TYPE>(output, buffer, args);
-}
+template void buffer_0000_linear<int16_t, DL_S16_BUFFER_TYPE>(int16_t *, DL_S16_BUFFER_TYPE *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_TAIL_RELU
-void dl_c_s16_tail_relu(int16_t *output, DL_S16_BUFFER_TYPE *buffer, const ConvArgsType &args)
-{
-    buffer_0000_relu<int16_t, DL_S16_BUFFER_TYPE>(output, buffer, args);
-}
+template void buffer_0000_relu<int16_t, DL_S16_BUFFER_TYPE>(int16_t *, DL_S16_BUFFER_TYPE *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_TAIL_BIAS_LINEAR
-void dl_c_s16_tail_bias_linear(int16_t *output, DL_S16_BUFFER_TYPE *buffer, const ConvArgsType &args)
-{
-    buffer_bias_linear<int16_t, DL_S16_BUFFER_TYPE, DL_S16_BUFFER_TYPE>(output, buffer, args);
-}
+template void buffer_bias_linear<int16_t, DL_S16_BUFFER_TYPE, DL_S16_BUFFER_TYPE>(int16_t *,
+                                                                                  DL_S16_BUFFER_TYPE *,
+                                                                                  const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_TAIL_BIAS_RELU
-void dl_c_s16_tail_bias_relu(int16_t *output, DL_S16_BUFFER_TYPE *buffer, const ConvArgsType &args)
-{
-    buffer_bias_relu<int16_t, DL_S16_BUFFER_TYPE, DL_S16_BUFFER_TYPE>(output, buffer, args);
-}
+template void buffer_bias_relu<int16_t, DL_S16_BUFFER_TYPE, DL_S16_BUFFER_TYPE>(int16_t *,
+                                                                                DL_S16_BUFFER_TYPE *,
+                                                                                const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_LINEAR
-void dl_c_s8_tail_linear(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_0000_linear<int8_t, int32_t>(output, buffer, args);
-}
+template void buffer_0000_linear<int8_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_RELU
-void dl_c_s8_tail_relu(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_0000_relu<int8_t, int32_t>(output, buffer, args);
-}
+template void buffer_0000_relu<int8_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_LEAKYRELU
-void dl_c_s8_tail_leakyrelu(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_0000_leakyrelu<int8_t, int32_t>(output, buffer, args);
-}
+template void buffer_0000_leakyrelu<int8_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_PRELU
-void dl_c_s8_tail_prelu(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_0000_prelu<int8_t, int32_t>(output, buffer, args);
-}
+template void buffer_0000_prelu<int8_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_BIAS_LINEAR
-void dl_c_s8_tail_bias_linear(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_bias_linear<int8_t, int32_t, int32_t>(output, buffer, args);
-}
+template void buffer_bias_linear<int8_t, int32_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_BIAS_RELU
-void dl_c_s8_tail_bias_relu(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_bias_relu<int8_t, int32_t, int32_t>(output, buffer, args);
-}
+template void buffer_bias_relu<int8_t, int32_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_BIAS_PER_CH_LINEAR
-void dl_c_s8_tail_bias_per_ch_linear(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_bias_linear<int8_t, int16_t, int32_t>(output, buffer, args);
-}
+template void buffer_bias_linear<int8_t, int16_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_BIAS_PER_CH_RELU
-void dl_c_s8_tail_bias_per_ch_relu(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_bias_relu<int8_t, int16_t, int32_t>(output, buffer, args);
-}
+template void buffer_bias_relu<int8_t, int16_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_BIAS_PER_CH_LEAKYRELU
-void dl_c_s8_tail_bias_per_ch_leakyrelu(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_bias_leakyrelu<int8_t, int16_t, int32_t>(output, buffer, args);
-}
+template void buffer_bias_leakyrelu<int8_t, int16_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
-#if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_BIAS_PER_CH_PRELU
-void dl_c_s8_tail_bias_per_ch_prelu(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_bias_prelu<int8_t, int8_t, int32_t>(output, buffer, args);
-}
+#if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_TAIL_BIAS_PER_CH_PRELU || DL_KERNEL_DL_C_S8_DW_TAIL_BIAS_PER_CH_PRELU
+template void buffer_bias_prelu<int8_t, int8_t, int32_t>(int8_t *, int32_t *, const ConvArgsType &);
 #endif
-#if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_DW_TAIL_BIAS_PER_CH_PRELU
-void dl_c_s8_dw_tail_bias_per_ch_prelu(int8_t *output, int32_t *buffer, const ConvArgsType &args)
-{
-    buffer_bias_prelu<int8_t, int8_t, int32_t>(output, buffer, args);
-}
-#endif
-}
+
+} // namespace base
+} // namespace dl

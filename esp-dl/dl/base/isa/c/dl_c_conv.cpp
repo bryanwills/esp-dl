@@ -4,8 +4,8 @@
 
 namespace dl {
 namespace base {
-template <typename feature_t, typename buffer_t, typename filter_t = feature_t>
-inline void conv2d_11cn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
+template <typename feature_t, typename buffer_t, typename filter_t>
+void conv2d_11cn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
 {
     const filter_t *filter_element = (const filter_t *)args.filter_element;
 
@@ -30,8 +30,8 @@ inline void conv2d_11cn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvAr
     }
 }
 
-template <typename feature_t, typename buffer_t, typename filter_t = feature_t>
-inline void conv2d_33cn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
+template <typename feature_t, typename buffer_t, typename filter_t>
+void conv2d_33cn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
 {
     // filter in sequence [H, W, C, N]
     // const filter_t *filter_r0 = args.filter_element;
@@ -111,8 +111,8 @@ inline void conv2d_33cn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvAr
     }
 }
 
-template <typename feature_t, typename buffer_t, typename filter_t = feature_t>
-inline void conv2d_hwcn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
+template <typename feature_t, typename buffer_t, typename filter_t>
+void conv2d_hwcn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
 {
     // filter in sequence [H, W, C, N]
     // const filter_t *filter_element = args.filter_element;                             // Reload filter
@@ -160,45 +160,33 @@ inline void conv2d_hwcn(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvAr
     }
 }
 
-} // namespace base
-} // namespace dl
-
-extern "C" {
-
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_CONV2D_11CN
-void dl_c_s16_conv2d_11cn(DL_S16_BUFFER_TYPE *buffer, int16_t *input, const dl::base::ConvArgsType &args)
-{
-    dl::base::conv2d_11cn<int16_t, DL_S16_BUFFER_TYPE>(buffer, input, args);
-}
+template void conv2d_11cn<int16_t, DL_S16_BUFFER_TYPE, int16_t>(DL_S16_BUFFER_TYPE *, int16_t *, const ConvArgsType &);
+#endif
+#if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_CONV2D_33CN
+template void conv2d_33cn<int16_t, DL_S16_BUFFER_TYPE, int16_t>(DL_S16_BUFFER_TYPE *, int16_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_CONV2D_HWCN
-void dl_c_s16_conv2d_hwcn(DL_S16_BUFFER_TYPE *buffer, int16_t *input, const dl::base::ConvArgsType &args)
-{
-    dl::base::conv2d_hwcn<int16_t, DL_S16_BUFFER_TYPE>(buffer, input, args);
-}
+template void conv2d_hwcn<int16_t, DL_S16_BUFFER_TYPE, int16_t>(DL_S16_BUFFER_TYPE *, int16_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_CONV2D_11CN
-void dl_c_s8_conv2d_11cn(int32_t *buffer, int8_t *input, const dl::base::ConvArgsType &args)
-{
-    dl::base::conv2d_11cn<int8_t, int32_t>(buffer, input, args);
-}
+template void conv2d_11cn<int8_t, int32_t, int8_t>(int32_t *, int8_t *, const ConvArgsType &);
+#endif
+#if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_CONV2D_33CN
+template void conv2d_33cn<int8_t, int32_t, int8_t>(int32_t *, int8_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_CONV2D_HWCN
-void dl_c_s8_conv2d_hwcn(int32_t *buffer, int8_t *input, const dl::base::ConvArgsType &args)
-{
-    dl::base::conv2d_hwcn<int8_t, int32_t>(buffer, input, args);
-}
+template void conv2d_hwcn<int8_t, int32_t, int8_t>(int32_t *, int8_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_W8A16_CONV2D_11CN
-void dl_c_w8a16_conv2d_11cn(DL_S16_BUFFER_TYPE *buffer, int16_t *input, const dl::base::ConvArgsType &args)
-{
-    dl::base::conv2d_11cn<int16_t, DL_S16_BUFFER_TYPE, int8_t>(buffer, input, args);
-}
+template void conv2d_11cn<int16_t, DL_S16_BUFFER_TYPE, int8_t>(DL_S16_BUFFER_TYPE *, int16_t *, const ConvArgsType &);
+#endif
+#if DL_COMPILE_ALL || DL_KERNEL_DL_C_W8A16_CONV2D_33CN
+template void conv2d_33cn<int16_t, DL_S16_BUFFER_TYPE, int8_t>(DL_S16_BUFFER_TYPE *, int16_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_W8A16_CONV2D_HWCN
-void dl_c_w8a16_conv2d_hwcn(DL_S16_BUFFER_TYPE *buffer, int16_t *input, const dl::base::ConvArgsType &args)
-{
-    dl::base::conv2d_hwcn<int16_t, DL_S16_BUFFER_TYPE, int8_t>(buffer, input, args);
-}
+template void conv2d_hwcn<int16_t, DL_S16_BUFFER_TYPE, int8_t>(DL_S16_BUFFER_TYPE *, int16_t *, const ConvArgsType &);
 #endif
-}
+
+} // namespace base
+} // namespace dl

@@ -8,14 +8,18 @@ kernel_abi: 1
 
 symbols:
   - dl_c_s16_conv2d_11cn
+  - dl_c_s16_conv2d_33cn
   - dl_c_s16_conv2d_hwcn
+  - dl_c_s16_depthwise_conv2d_33c1
   - dl_c_s16_depthwise_conv2d_hwc1
   - dl_c_s16_tail_bias_linear
   - dl_c_s16_tail_bias_relu
   - dl_c_s16_tail_linear
   - dl_c_s16_tail_relu
   - dl_c_s8_conv2d_11cn
+  - dl_c_s8_conv2d_33cn
   - dl_c_s8_conv2d_hwcn
+  - dl_c_s8_depthwise_conv2d_33c1
   - dl_c_s8_depthwise_conv2d_hwc1
   - dl_c_s8_dw_tail_bias_per_ch_prelu
   - dl_c_s8_tail_bias_linear
@@ -29,6 +33,7 @@ symbols:
   - dl_c_s8_tail_prelu
   - dl_c_s8_tail_relu
   - dl_c_w8a16_conv2d_11cn
+  - dl_c_w8a16_conv2d_33cn
   - dl_c_w8a16_conv2d_hwcn
   - dl_esp32p4_s16_conv2d_11cn
   - dl_esp32p4_s16_conv2d_11cn_bias

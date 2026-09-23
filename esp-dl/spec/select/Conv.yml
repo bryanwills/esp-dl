@@ -4509,7 +4509,7 @@ rules:
     bias: false
     act: linear
     per_ch: false
-    body: dl_c_s16_conv2d_hwcn
+    body: dl_c_s16_conv2d_33cn
     border: dl_c_s16_conv2d_hwcn
     tail: dl_c_s16_tail_linear
   - target: c
@@ -4519,7 +4519,7 @@ rules:
     bias: false
     act: relu
     per_ch: false
-    body: dl_c_s16_conv2d_hwcn
+    body: dl_c_s16_conv2d_33cn
     border: dl_c_s16_conv2d_hwcn
     tail: dl_c_s16_tail_relu
   - target: c
@@ -4529,7 +4529,7 @@ rules:
     bias: true
     act: linear
     per_ch: false
-    body: dl_c_s16_conv2d_hwcn
+    body: dl_c_s16_conv2d_33cn
     border: dl_c_s16_conv2d_hwcn
     tail: dl_c_s16_tail_bias_linear
   - target: c
@@ -4539,7 +4539,7 @@ rules:
     bias: true
     act: relu
     per_ch: false
-    body: dl_c_s16_conv2d_hwcn
+    body: dl_c_s16_conv2d_33cn
     border: dl_c_s16_conv2d_hwcn
     tail: dl_c_s16_tail_bias_relu
   - target: c
@@ -4549,7 +4549,7 @@ rules:
     bias: false
     act: linear
     per_ch: true
-    body: dl_c_s16_conv2d_hwcn
+    body: dl_c_s16_conv2d_33cn
     border: dl_c_s16_conv2d_hwcn
     tail: dl_c_s16_tail_linear
   - target: c
@@ -4559,7 +4559,7 @@ rules:
     bias: false
     act: relu
     per_ch: true
-    body: dl_c_s16_conv2d_hwcn
+    body: dl_c_s16_conv2d_33cn
     border: dl_c_s16_conv2d_hwcn
     tail: dl_c_s16_tail_relu
   - target: c
@@ -4569,7 +4569,7 @@ rules:
     bias: true
     act: linear
     per_ch: true
-    body: dl_c_s16_conv2d_hwcn
+    body: dl_c_s16_conv2d_33cn
     border: dl_c_s16_conv2d_hwcn
     tail: dl_c_s16_tail_bias_linear
   - target: c
@@ -4579,7 +4579,7 @@ rules:
     bias: true
     act: relu
     per_ch: true
-    body: dl_c_s16_conv2d_hwcn
+    body: dl_c_s16_conv2d_33cn
     border: dl_c_s16_conv2d_hwcn
     tail: dl_c_s16_tail_bias_relu
   - target: c
@@ -4777,7 +4777,7 @@ rules:
     bias: false
     act: linear
     per_ch: false
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_linear
   - target: c
@@ -4787,7 +4787,7 @@ rules:
     bias: false
     act: relu
     per_ch: false
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_relu
   - target: c
@@ -4797,7 +4797,7 @@ rules:
     bias: true
     act: linear
     per_ch: false
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_bias_linear
   - target: c
@@ -4807,7 +4807,7 @@ rules:
     bias: true
     act: relu
     per_ch: false
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_bias_relu
   - target: c
@@ -4817,7 +4817,7 @@ rules:
     bias: false
     act: linear
     per_ch: true
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_linear
   - target: c
@@ -4827,7 +4827,7 @@ rules:
     bias: false
     act: relu
     per_ch: true
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_relu
   - target: c
@@ -4837,7 +4837,7 @@ rules:
     bias: false
     act: leakyrelu
     per_ch: true
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_leakyrelu
   - target: c
@@ -4847,7 +4847,7 @@ rules:
     bias: false
     act: prelu
     per_ch: true
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_prelu
   - target: c
@@ -4857,7 +4857,7 @@ rules:
     bias: true
     act: linear
     per_ch: true
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_bias_per_ch_linear
   - target: c
@@ -4867,7 +4867,7 @@ rules:
     bias: true
     act: relu
     per_ch: true
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_bias_per_ch_relu
   - target: c
@@ -4877,7 +4877,7 @@ rules:
     bias: true
     act: leakyrelu
     per_ch: true
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_bias_per_ch_leakyrelu
   - target: c
@@ -4887,7 +4887,7 @@ rules:
     bias: true
     act: prelu
     per_ch: true
-    body: dl_c_s8_conv2d_hwcn
+    body: dl_c_s8_conv2d_33cn
     border: dl_c_s8_conv2d_hwcn
     tail: dl_c_s8_tail_bias_per_ch_prelu
   - target: c
@@ -5089,7 +5089,7 @@ rules:
     bias: false
     act: linear
     per_ch: false
-    body: dl_c_w8a16_conv2d_hwcn
+    body: dl_c_w8a16_conv2d_33cn
     border: dl_c_w8a16_conv2d_hwcn
     tail: dl_c_s16_tail_linear
   - target: c
@@ -5099,7 +5099,7 @@ rules:
     bias: false
     act: relu
     per_ch: false
-    body: dl_c_w8a16_conv2d_hwcn
+    body: dl_c_w8a16_conv2d_33cn
     border: dl_c_w8a16_conv2d_hwcn
     tail: dl_c_s16_tail_relu
   - target: c
@@ -5109,7 +5109,7 @@ rules:
     bias: true
     act: linear
     per_ch: false
-    body: dl_c_w8a16_conv2d_hwcn
+    body: dl_c_w8a16_conv2d_33cn
     border: dl_c_w8a16_conv2d_hwcn
     tail: dl_c_s16_tail_bias_linear
   - target: c
@@ -5119,7 +5119,7 @@ rules:
     bias: true
     act: relu
     per_ch: false
-    body: dl_c_w8a16_conv2d_hwcn
+    body: dl_c_w8a16_conv2d_33cn
     border: dl_c_w8a16_conv2d_hwcn
     tail: dl_c_s16_tail_bias_relu
   - target: c
@@ -5129,7 +5129,7 @@ rules:
     bias: false
     act: linear
     per_ch: true
-    body: dl_c_w8a16_conv2d_hwcn
+    body: dl_c_w8a16_conv2d_33cn
     border: dl_c_w8a16_conv2d_hwcn
     tail: dl_c_s16_tail_linear
   - target: c
@@ -5139,7 +5139,7 @@ rules:
     bias: false
     act: relu
     per_ch: true
-    body: dl_c_w8a16_conv2d_hwcn
+    body: dl_c_w8a16_conv2d_33cn
     border: dl_c_w8a16_conv2d_hwcn
     tail: dl_c_s16_tail_relu
   - target: c
@@ -5149,7 +5149,7 @@ rules:
     bias: true
     act: linear
     per_ch: true
-    body: dl_c_w8a16_conv2d_hwcn
+    body: dl_c_w8a16_conv2d_33cn
     border: dl_c_w8a16_conv2d_hwcn
     tail: dl_c_s16_tail_bias_linear
   - target: c
@@ -5159,7 +5159,7 @@ rules:
     bias: true
     act: relu
     per_ch: true
-    body: dl_c_w8a16_conv2d_hwcn
+    body: dl_c_w8a16_conv2d_33cn
     border: dl_c_w8a16_conv2d_hwcn
     tail: dl_c_s16_tail_bias_relu
   - target: c
@@ -5249,7 +5249,7 @@ rules:
     bias: false
     act: linear
     per_ch: false
-    body: dl_c_s16_depthwise_conv2d_hwc1
+    body: dl_c_s16_depthwise_conv2d_33c1
     border: dl_c_s16_depthwise_conv2d_hwc1
     tail: dl_c_s16_tail_linear
   - target: c
@@ -5259,7 +5259,7 @@ rules:
     bias: false
     act: relu
     per_ch: false
-    body: dl_c_s16_depthwise_conv2d_hwc1
+    body: dl_c_s16_depthwise_conv2d_33c1
     border: dl_c_s16_depthwise_conv2d_hwc1
     tail: dl_c_s16_tail_relu
   - target: c
@@ -5269,7 +5269,7 @@ rules:
     bias: true
     act: linear
     per_ch: false
-    body: dl_c_s16_depthwise_conv2d_hwc1
+    body: dl_c_s16_depthwise_conv2d_33c1
     border: dl_c_s16_depthwise_conv2d_hwc1
     tail: dl_c_s16_tail_bias_linear
   - target: c
@@ -5279,7 +5279,7 @@ rules:
     bias: true
     act: relu
     per_ch: false
-    body: dl_c_s16_depthwise_conv2d_hwc1
+    body: dl_c_s16_depthwise_conv2d_33c1
     border: dl_c_s16_depthwise_conv2d_hwc1
     tail: dl_c_s16_tail_bias_relu
   - target: c
@@ -5289,7 +5289,7 @@ rules:
     bias: false
     act: linear
     per_ch: true
-    body: dl_c_s16_depthwise_conv2d_hwc1
+    body: dl_c_s16_depthwise_conv2d_33c1
     border: dl_c_s16_depthwise_conv2d_hwc1
     tail: dl_c_s16_tail_linear
   - target: c
@@ -5299,7 +5299,7 @@ rules:
     bias: false
     act: relu
     per_ch: true
-    body: dl_c_s16_depthwise_conv2d_hwc1
+    body: dl_c_s16_depthwise_conv2d_33c1
     border: dl_c_s16_depthwise_conv2d_hwc1
     tail: dl_c_s16_tail_relu
   - target: c
@@ -5309,7 +5309,7 @@ rules:
     bias: true
     act: linear
     per_ch: true
-    body: dl_c_s16_depthwise_conv2d_hwc1
+    body: dl_c_s16_depthwise_conv2d_33c1
     border: dl_c_s16_depthwise_conv2d_hwc1
     tail: dl_c_s16_tail_bias_linear
   - target: c
@@ -5319,7 +5319,7 @@ rules:
     bias: true
     act: relu
     per_ch: true
-    body: dl_c_s16_depthwise_conv2d_hwc1
+    body: dl_c_s16_depthwise_conv2d_33c1
     border: dl_c_s16_depthwise_conv2d_hwc1
     tail: dl_c_s16_tail_bias_relu
   - target: c
@@ -5481,7 +5481,7 @@ rules:
     bias: false
     act: linear
     per_ch: false
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_linear
   - target: c
@@ -5491,7 +5491,7 @@ rules:
     bias: false
     act: relu
     per_ch: false
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_relu
   - target: c
@@ -5501,7 +5501,7 @@ rules:
     bias: true
     act: linear
     per_ch: false
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_bias_linear
   - target: c
@@ -5511,7 +5511,7 @@ rules:
     bias: true
     act: relu
     per_ch: false
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_bias_relu
   - target: c
@@ -5521,7 +5521,7 @@ rules:
     bias: false
     act: linear
     per_ch: true
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_linear
   - target: c
@@ -5531,7 +5531,7 @@ rules:
     bias: false
     act: relu
     per_ch: true
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_relu
   - target: c
@@ -5541,7 +5541,7 @@ rules:
     bias: false
     act: leakyrelu
     per_ch: true
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_leakyrelu
   - target: c
@@ -5551,7 +5551,7 @@ rules:
     bias: false
     act: prelu
     per_ch: true
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_prelu
   - target: c
@@ -5561,7 +5561,7 @@ rules:
     bias: true
     act: linear
     per_ch: true
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_bias_per_ch_linear
   - target: c
@@ -5571,7 +5571,7 @@ rules:
     bias: true
     act: relu
     per_ch: true
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_bias_per_ch_relu
   - target: c
@@ -5581,7 +5581,7 @@ rules:
     bias: true
     act: leakyrelu
     per_ch: true
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_tail_bias_per_ch_leakyrelu
   - target: c
@@ -5591,7 +5591,7 @@ rules:
     bias: true
     act: prelu
     per_ch: true
-    body: dl_c_s8_depthwise_conv2d_hwc1
+    body: dl_c_s8_depthwise_conv2d_33c1
     border: dl_c_s8_depthwise_conv2d_hwc1
     tail: dl_c_s8_dw_tail_bias_per_ch_prelu
   - target: c
