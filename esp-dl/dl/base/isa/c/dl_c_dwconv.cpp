@@ -5,7 +5,7 @@
 namespace dl {
 namespace base {
 template <typename feature_t, typename buffer_t>
-inline void depthwise_conv2d_33c1(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
+void depthwise_conv2d_33c1(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
 {
     // static int flag = 1;
     const feature_t *filter_r0 = (feature_t *)args.filter_element;
@@ -32,7 +32,7 @@ inline void depthwise_conv2d_33c1(buffer_t *buffer_ptr, feature_t *input_ptr, co
 }
 
 template <typename feature_t, typename buffer_t>
-inline void depthwise_conv2d_hwc1(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
+void depthwise_conv2d_hwc1(buffer_t *buffer_ptr, feature_t *input_ptr, const ConvArgsType &args)
 {
     const feature_t *filter_element = (feature_t *)args.filter_element;
     for (size_t filter_y = 0; filter_y < args.filter_height; filter_y++)      // H
@@ -52,21 +52,18 @@ inline void depthwise_conv2d_hwc1(buffer_t *buffer_ptr, feature_t *input_ptr, co
     }
 }
 
-} // namespace base
-} // namespace dl
-
-extern "C" {
-
+#if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_DEPTHWISE_CONV2D_33C1
+template void depthwise_conv2d_33c1<int16_t, DL_S16_BUFFER_TYPE>(DL_S16_BUFFER_TYPE *, int16_t *, const ConvArgsType &);
+#endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S16_DEPTHWISE_CONV2D_HWC1
-void dl_c_s16_depthwise_conv2d_hwc1(DL_S16_BUFFER_TYPE *buffer, int16_t *input, const dl::base::ConvArgsType &args)
-{
-    dl::base::depthwise_conv2d_hwc1<int16_t, DL_S16_BUFFER_TYPE>(buffer, input, args);
-}
+template void depthwise_conv2d_hwc1<int16_t, DL_S16_BUFFER_TYPE>(DL_S16_BUFFER_TYPE *, int16_t *, const ConvArgsType &);
+#endif
+#if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_DEPTHWISE_CONV2D_33C1
+template void depthwise_conv2d_33c1<int8_t, int32_t>(int32_t *, int8_t *, const ConvArgsType &);
 #endif
 #if DL_COMPILE_ALL || DL_KERNEL_DL_C_S8_DEPTHWISE_CONV2D_HWC1
-void dl_c_s8_depthwise_conv2d_hwc1(int32_t *buffer, int8_t *input, const dl::base::ConvArgsType &args)
-{
-    dl::base::depthwise_conv2d_hwc1<int8_t, int32_t>(buffer, input, args);
-}
+template void depthwise_conv2d_hwc1<int8_t, int32_t>(int32_t *, int8_t *, const ConvArgsType &);
 #endif
-}
+
+} // namespace base
+} // namespace dl
